@@ -1,0 +1,5 @@
+{
+    "require": {
+        "symfony/symfony1": "1.4.20"
+    }
+}
