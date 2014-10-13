@@ -1,0 +1,43 @@
+BetyoloCategory:
+  bongda:
+    name: BongDa
+    description: Bong da
+  aoe:
+    name: Aoe
+    description: De Che
+
+BetyoloSide:
+  bongda_a:
+    name: BongDa side A
+    description:  bet for BongDa side A 
+    BetyoloCategory: bongda
+  bongda_b:
+    name: BongDa side B
+    description:  bet for categogy bong da side B. 
+    BetyoloCategory: bongda
+  aoe_a:
+    name: Aoe side A
+    description:  bet for aoe side A 
+    BetyoloCategory: aoe
+  aoe_b:
+    name: Aoe side B
+    description:  bet for aoe side B 
+    BetyoloCategory: aoe
+
+BetyoloBet:
+  bet_bongda:
+    creator_id: 1
+    description:  Tran giao huu bong da giua Laos vs Campuchia 
+    SideA: bongda_a
+    SideB: bongda_b
+    BetyoloCategory: bongda
+    status: 1
+    result: 1
+  bet_aoe:
+    creator_id: 1
+    description:  Tran giao huu aoe giua Laos vs Campuchia 
+    SideA: aoe_a
+    SideB: aoe_b
+    BetyoloCategory: aoe
+    status: 1
+    result: 1
