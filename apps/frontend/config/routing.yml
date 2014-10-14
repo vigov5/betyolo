@@ -26,3 +26,11 @@ sf_guard_signout:
 #sf_guard_password:
 #  url:   /request_password
 #  param: { module: sfGuardAuth, action: password }
+
+transaction_deposit:
+  url: /transaction/deposit
+  param: {module: transaction, action: deposit}
+
+create_deposit:
+  url: /transaction/deposit2
+  param: {module: transaction, action: deposit2}
