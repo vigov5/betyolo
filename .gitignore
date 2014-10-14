@@ -1,4 +1,5 @@
 /cache/
 /log/
+/log/.*
 /config/databases.yml
 /plugin/.*

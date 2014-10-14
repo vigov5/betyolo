@@ -13,12 +13,15 @@
 class Transaction extends BaseTransaction
 {
   #type
-	const DEPOSIT  = 1;
-	const WITHDRAW = 2;
-  #status
-  const PENDING   = 1;
-  const COMPLETED = 2;
-  const FAILED    = 3;
+  const DEPOSIT  = 1;
+  const WITHDRAW = 2;
+
+  static $statuses = array(
+    '1' => 'PENDING',
+    '2' => 'COMPLETED',
+    '3' => 'FAILED',
+  );
+
   static public $amounts = array(
     10000 => 10000,
     20000 => 20000,

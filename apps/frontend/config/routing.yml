@@ -32,5 +32,5 @@ transaction_deposit:
   param: {module: transaction, action: deposit}
 
 create_deposit:
-  url: /transaction/deposit2
-  param: {module: transaction, action: deposit2}
+  url: /transaction/userdeposit
+  param: {module: transaction, action: userdeposit}
