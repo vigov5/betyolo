@@ -24,12 +24,19 @@
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
                                     <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <span class="caret"></span></a>
+                                        <?php if ($sf_user->isAuthenticated()): ?>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $sf_user->getUsername(); ?><span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li><a href="#">Profile</a></li>
                                             <li class="divider"></li>
-                                            <li><a href="#">Log out</a></li>
+                                            <li><a href="<?php echo url_for('sf_guard_signout') ?>">Log out</a></li>
                                         </ul>
+                                        <?php else: ?>
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <span class="caret"></span></a>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li><a href="<?php echo url_for('sf_guard_signin') ?>">Signin</a></li>
+                                        </ul>
+                                        <?php endif ?>
                                     </li>
                                 </ul>
                             </div><!--/.nav-collapse -->
