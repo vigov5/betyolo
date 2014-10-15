@@ -36,34 +36,34 @@ abstract class BaseTransaction extends sfDoctrineRecord
     {
         $this->setTableName('transaction');
         $this->hasColumn('user_id', 'integer', null, array(
-            'type' => 'integer',
-            'notnull' => true,
-        ));
+             'type' => 'integer',
+             'notnull' => true,
+             ));
         $this->hasColumn('type', 'integer', null, array(
-            'type' => 'integer',
-            'notnull' => true,
-        ));
+             'type' => 'integer',
+             'notnull' => true,
+             ));
         $this->hasColumn('amount', 'integer', null, array(
-            'type' => 'integer',
-            'notnull' => true,
-        ));
+             'type' => 'integer',
+             'notnull' => true,
+             ));
         $this->hasColumn('status', 'integer', null, array(
-            'type' => 'integer',
-            'notnull' => true,
-        ));
+             'type' => 'integer',
+             'notnull' => true,
+             ));
         $this->hasColumn('created_at', 'timestamp', null, array(
-            'type' => 'timestamp',
-            'notnull' => true,
-        ));
+             'type' => 'timestamp',
+             'notnull' => true,
+             ));
     }
 
     public function setUp()
     {
         parent::setUp();
         $this->hasOne('sfGuardUser as User', array(
-            'local' => 'user_id',
-            'foreign' => 'id',
-            'onDelete' => 'CASCADE'));
+             'local' => 'user_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
 
         $timestampable0 = new Doctrine_Template_Timestampable();
         $this->actAs($timestampable0);

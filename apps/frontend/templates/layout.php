@@ -44,6 +44,11 @@
                     </div>
                 </div><!-- Fixed navbar -->
             </div>
+            <?php if ($sf_user->hasFlash('error')): ?>
+              <div class="alert alert-error"><?php echo $sf_user->getFlash('error'); ?></div>
+            <?php elseif ($sf_user->hasFlash('success')): ?>
+              <div class="alert alert-success"><?php echo $sf_user->getFlash('success'); ?></div>
+           <?php endif ?>
             <?php echo $sf_content ?>
     </body>
 </html>

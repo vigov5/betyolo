@@ -12,40 +12,40 @@
  */
 abstract class BaseTransactionForm extends BaseFormDoctrine
 {
-    public function setup()
-    {
-        $this->setWidgets(array(
-            'id'         => new sfWidgetFormInputHidden(),
-            'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
-            'type'       => new sfWidgetFormInputText(),
-            'amount'     => new sfWidgetFormInputText(),
-            'status'     => new sfWidgetFormInputText(),
-            'created_at' => new sfWidgetFormDateTime(),
-            'updated_at' => new sfWidgetFormDateTime(),
-        ));
+  public function setup()
+  {
+    $this->setWidgets(array(
+      'id'         => new sfWidgetFormInputHidden(),
+      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
+      'type'       => new sfWidgetFormInputText(),
+      'amount'     => new sfWidgetFormInputText(),
+      'status'     => new sfWidgetFormInputText(),
+      'created_at' => new sfWidgetFormDateTime(),
+      'updated_at' => new sfWidgetFormDateTime(),
+    ));
 
-        $this->setValidators(array(
-            'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-            'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-            'type'       => new sfValidatorInteger(),
-            'amount'     => new sfValidatorInteger(),
-            'status'     => new sfValidatorInteger(),
-            'created_at' => new sfValidatorDateTime(),
-            'updated_at' => new sfValidatorDateTime(),
-        ));
+    $this->setValidators(array(
+      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
+      'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
+      'type'       => new sfValidatorInteger(),
+      'amount'     => new sfValidatorInteger(),
+      'status'     => new sfValidatorInteger(),
+      'created_at' => new sfValidatorDateTime(),
+      'updated_at' => new sfValidatorDateTime(),
+    ));
 
-        $this->widgetSchema->setNameFormat('transaction[%s]');
+    $this->widgetSchema->setNameFormat('transaction[%s]');
 
-        $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
+    $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
 
-        $this->setupInheritance();
+    $this->setupInheritance();
 
-        parent::setup();
-    }
+    parent::setup();
+  }
 
-    public function getModelName()
-    {
-        return 'Transaction';
-    }
+  public function getModelName()
+  {
+    return 'Transaction';
+  }
 
 }
