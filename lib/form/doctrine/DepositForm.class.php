@@ -14,7 +14,7 @@ class DepositForm extends BaseTransactionForm
   {
     $this->useFields(array('amount'));
     $this->setDefault('type', Transaction::DEPOSIT);
-    $this->setDefault('status', array_search('PENDING', Transaction::$statuses));
+    $this->setDefault('status', Transaction::PENDING);
     $this->setDefault('user_id', sfContext::getInstance()->getUser()->getGuardUser()->getId());
 
     $this->setWidgets(array(

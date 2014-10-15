@@ -52,3 +52,17 @@ Transaction:
       local: user_id
       foreignAlias: Transactions
       onDelete: CASCADE
+
+UserProfile:
+  actAs: { Timestampable: ~ }
+  columns:
+    id: { type: integer, primary: true, autoincrement: true }
+    sf_guard_user_id: { type:integer }
+    hcoin: { type:integer, default: 0 }
+  relations:
+    User:
+      class: sfGuardUser
+      foreignType: one
+      foreignAlias: Profile
+      local: sf_guard_user_id
+      onDelete: CASCADE

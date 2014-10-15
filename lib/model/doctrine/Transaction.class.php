@@ -16,10 +16,14 @@ class Transaction extends BaseTransaction
   const DEPOSIT  = 1;
   const WITHDRAW = 2;
 
+  #status
+  const PENDING   = 1;
+  const COMPLETED = 2;
+  const FAILED    = 3;
   static $statuses = array(
-    '1' => 'PENDING',
-    '2' => 'COMPLETED',
-    '3' => 'FAILED',
+    self::PENDING   => 'PENDING',
+    self::COMPLETED => 'COMPLETED',
+    self::FAILED    => 'FAILED',
   );
 
   static public $amounts = array(
@@ -32,4 +36,34 @@ class Transaction extends BaseTransaction
     400000 => 400000,
     500000 => 500000,
   );
+
+  public function deposit($hcoin = 0)
+  {
+    if ($this->getStatus() != self::PENDING || $hcoin <= 0 ) {
+      return false;
+    }
+
+    $user_hcoin = $this->getUser()->getProfile()->getHcoin();
+
+    if (!$user_hcoin) {
+      $user_profile = new UserProfile();
+      $user_profile->setsfGuardUserId($this->getUser()->getId());
+      $user_profile->setHcoin($hcoin);
+    } else {
+      $user_profile = Doctrine_Core::getTable('UserProfile')->find($this->getUser()->getId());
+      $user_profile->setHcoin($user_hcoin + $hcoin);
+    }
+    $user_profile->save();
+
+    $this->setStatus(self::COMPLETED);
+    $this->save();
+
+    return true;
+  }
+
+  public function cancelDeposit()
+  {
+    $this->setStatus(self::FAILED);
+    $this->save();
+  }
 }
