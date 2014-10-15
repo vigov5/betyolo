@@ -1,6 +1,6 @@
 <h1>Betyolo bets List</h1>
 
-<table>
+<table border="1">
   <thead>
     <tr>
       <th>Id</th>
@@ -11,23 +11,23 @@
       <th>Category</th>
       <th>Status</th>
       <th>Result</th>
-      <th>Created at</th>
-      <th>Updated at</th>
+      <th>Start date</th>
+      <th>End date</th>
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($betyolo_bets as $betyolo_bet): ?>
+    <?php foreach ($betyolo_bets as $bet): ?>
     <tr>
-      <td><a href="<?php echo url_for('bet/show?id='.$betyolo_bet->getId()) ?>"><?php echo $betyolo_bet->getId() ?></a></td>
-      <td><?php echo $betyolo_bet->getCreatorId() ?></td>
-      <td><?php echo $betyolo_bet->getDescription() ?></td>
-      <td><?php echo $betyolo_bet->getSideAId() ?></td>
-      <td><?php echo $betyolo_bet->getSideBId() ?></td>
-      <td><?php echo $betyolo_bet->getCategoryId() ?></td>
-      <td><?php echo $betyolo_bet->getStatus() ?></td>
-      <td><?php echo $betyolo_bet->getResult() ?></td>
-      <td><?php echo $betyolo_bet->getCreatedAt() ?></td>
-      <td><?php echo $betyolo_bet->getUpdatedAt() ?></td>
+      <td><a href="<?php echo url_for('bet/show?id='.$bet->getId()) ?>"><?php echo $bet->getId() ?></a></td>
+      <td><?php echo $bet->getsfGuardUser()->getUserName() ?></td>
+      <td><?php echo $bet->getDescription() ?></td>
+      <td><a href="<?php echo url_for('side/show?id=' . $bet->getSideA()->getId() ) ?>" ><?php echo $bet->getSideA()->getName() ?></a></td>
+      <td><a href="<?php echo url_for('side/show?id=' . $bet->getSideB()->getId() ) ?>" ><?php echo $bet->getSideB()->getName() ?></a></td>
+      <td><a href="<?php echo url_for('category/show?id=' . $bet->getBetyoloCategory()->getId() ) ?>" ><?php echo $bet->getBetyoloCategory()->getName() ?></a></td>
+      <td><?php echo BetyoloBet::$statuses[$bet->getStatus()] ?></td>
+      <td><?php echo BetyoloBet::$results[$bet->getResult()] ?></td>
+      <td><?php echo $bet->getStartDt() ?></td>
+      <td><?php echo $bet->getEndDt() ?></td>
     </tr>
     <?php endforeach; ?>
   </tbody>

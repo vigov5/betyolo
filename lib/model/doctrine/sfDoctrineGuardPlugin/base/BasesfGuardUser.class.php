@@ -21,6 +21,7 @@
  * @property Doctrine_Collection $sfGuardUserGroup
  * @property sfGuardRememberKey $RememberKeys
  * @property sfGuardForgotPassword $ForgotPassword
+ * @property Doctrine_Collection $BetyoloBet
  * @property Doctrine_Collection $Transactions
  * @property UserProfile $Profile
  * 
@@ -40,6 +41,7 @@
  * @method Doctrine_Collection   getSfGuardUserGroup()      Returns the current record's "sfGuardUserGroup" collection
  * @method sfGuardRememberKey    getRememberKeys()          Returns the current record's "RememberKeys" value
  * @method sfGuardForgotPassword getForgotPassword()        Returns the current record's "ForgotPassword" value
+ * @method Doctrine_Collection   getBetyoloBet()            Returns the current record's "BetyoloBet" collection
  * @method Doctrine_Collection   getTransactions()          Returns the current record's "Transactions" collection
  * @method UserProfile           getProfile()               Returns the current record's "Profile" value
  * @method sfGuardUser           setFirstName()             Sets the current record's "first_name" value
@@ -58,6 +60,7 @@
  * @method sfGuardUser           setSfGuardUserGroup()      Sets the current record's "sfGuardUserGroup" collection
  * @method sfGuardUser           setRememberKeys()          Sets the current record's "RememberKeys" value
  * @method sfGuardUser           setForgotPassword()        Sets the current record's "ForgotPassword" value
+ * @method sfGuardUser           setBetyoloBet()            Sets the current record's "BetyoloBet" collection
  * @method sfGuardUser           setTransactions()          Sets the current record's "Transactions" collection
  * @method sfGuardUser           setProfile()               Sets the current record's "Profile" value
  * 
@@ -154,6 +157,10 @@ abstract class BasesfGuardUser extends sfDoctrineRecord
         $this->hasOne('sfGuardForgotPassword as ForgotPassword', array(
              'local' => 'id',
              'foreign' => 'user_id'));
+
+        $this->hasMany('BetyoloBet', array(
+             'local' => 'id',
+             'foreign' => 'creator_id'));
 
         $this->hasMany('Transaction as Transactions', array(
              'local' => 'id',

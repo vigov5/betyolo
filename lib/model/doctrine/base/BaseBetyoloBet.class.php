@@ -12,9 +12,12 @@
  * @property integer $category_id
  * @property integer $status
  * @property integer $result
+ * @property datetime $start_dt
+ * @property datetime $end_dt
  * @property BetyoloCategory $BetyoloCategory
  * @property BetyoloSide $SideA
  * @property BetyoloSide $SideB
+ * @property sfGuardUser $sfGuardUser
  * 
  * @method integer         getCreatorId()       Returns the current record's "creator_id" value
  * @method string          getDescription()     Returns the current record's "description" value
@@ -23,9 +26,12 @@
  * @method integer         getCategoryId()      Returns the current record's "category_id" value
  * @method integer         getStatus()          Returns the current record's "status" value
  * @method integer         getResult()          Returns the current record's "result" value
+ * @method datetime        getStartDt()         Returns the current record's "start_dt" value
+ * @method datetime        getEndDt()           Returns the current record's "end_dt" value
  * @method BetyoloCategory getBetyoloCategory() Returns the current record's "BetyoloCategory" value
  * @method BetyoloSide     getSideA()           Returns the current record's "SideA" value
  * @method BetyoloSide     getSideB()           Returns the current record's "SideB" value
+ * @method sfGuardUser     getSfGuardUser()     Returns the current record's "sfGuardUser" value
  * @method BetyoloBet      setCreatorId()       Sets the current record's "creator_id" value
  * @method BetyoloBet      setDescription()     Sets the current record's "description" value
  * @method BetyoloBet      setSideAId()         Sets the current record's "side_a_id" value
@@ -33,9 +39,12 @@
  * @method BetyoloBet      setCategoryId()      Sets the current record's "category_id" value
  * @method BetyoloBet      setStatus()          Sets the current record's "status" value
  * @method BetyoloBet      setResult()          Sets the current record's "result" value
+ * @method BetyoloBet      setStartDt()         Sets the current record's "start_dt" value
+ * @method BetyoloBet      setEndDt()           Sets the current record's "end_dt" value
  * @method BetyoloBet      setBetyoloCategory() Sets the current record's "BetyoloCategory" value
  * @method BetyoloBet      setSideA()           Sets the current record's "SideA" value
  * @method BetyoloBet      setSideB()           Sets the current record's "SideB" value
+ * @method BetyoloBet      setSfGuardUser()     Sets the current record's "sfGuardUser" value
  * 
  * @package    betyolo
  * @subpackage model
@@ -73,6 +82,14 @@ abstract class BaseBetyoloBet extends sfDoctrineRecord
         $this->hasColumn('result', 'integer', null, array(
              'type' => 'integer',
              ));
+        $this->hasColumn('start_dt', 'datetime', null, array(
+             'type' => 'datetime',
+             'notnull' => true,
+             ));
+        $this->hasColumn('end_dt', 'datetime', null, array(
+             'type' => 'datetime',
+             'notnull' => true,
+             ));
     }
 
     public function setUp()
@@ -90,6 +107,11 @@ abstract class BaseBetyoloBet extends sfDoctrineRecord
 
         $this->hasOne('BetyoloSide as SideB', array(
              'local' => 'side_b_id',
+             'foreign' => 'id',
+             'onDelete' => 'CASCADE'));
+
+        $this->hasOne('sfGuardUser', array(
+             'local' => 'creator_id',
              'foreign' => 'id',
              'onDelete' => 'CASCADE'));
 

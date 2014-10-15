@@ -12,4 +12,15 @@
  */
 class BetyoloBet extends BaseBetyoloBet
 {
+  public static $statuses = array(
+    1 => "on going",
+    2 => "exprie",
+  );
+
+  public static $results = array(
+    1 => "A win",
+    2 => "B win",
+    3 => "None",
+  );
+  
 }

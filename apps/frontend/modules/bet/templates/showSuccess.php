@@ -6,7 +6,7 @@
     </tr>
     <tr>
       <th>Creator:</th>
-      <td><?php echo $betyolo_bet->getCreatorId() ?></td>
+      <td><?php echo $betyolo_bet->getsfGuardUser()->getUserName() ?></td>
     </tr>
     <tr>
       <th>Description:</th>
@@ -14,31 +14,31 @@
     </tr>
     <tr>
       <th>Side a:</th>
-      <td><?php echo $betyolo_bet->getSideAId() ?></td>
+      <td><a href="<?php echo url_for('side/show?id=' . $betyolo_bet->getSideA()->getId() ) ?>" ><?php echo $betyolo_bet->getSideA()->getName() ?></a></td>
     </tr>
     <tr>
       <th>Side b:</th>
-      <td><?php echo $betyolo_bet->getSideBId() ?></td>
+      <td><a href="<?php echo url_for('side/show?id=' . $betyolo_bet->getSideB()->getId() ) ?>" ><?php echo $betyolo_bet->getSideB()->getName() ?></a></td>
     </tr>
     <tr>
       <th>Category:</th>
-      <td><?php echo $betyolo_bet->getCategoryId() ?></td>
+      <td><a href="<?php echo url_for('category/show?id=' . $betyolo_bet->getBetyoloCategory()->getId() ) ?>" ><?php echo $betyolo_bet->getBetyoloCategory()->getName() ?></a></td>
     </tr>
     <tr>
       <th>Status:</th>
-      <td><?php echo $betyolo_bet->getStatus() ?></td>
+      <td><?php echo BetyoloBet::$statuses[$betyolo_bet->getStatus()] ?></td>
     </tr>
     <tr>
       <th>Result:</th>
-      <td><?php echo $betyolo_bet->getResult() ?></td>
+      <td><?php echo BetyoloBet::$results[$betyolo_bet->getResult()] ?></td>
     </tr>
     <tr>
-      <th>Created at:</th>
-      <td><?php echo $betyolo_bet->getCreatedAt() ?></td>
+      <th>Start dt:</th>
+      <td><?php echo $betyolo_bet->getStartDt() ?></td>
     </tr>
     <tr>
-      <th>Updated at:</th>
-      <td><?php echo $betyolo_bet->getUpdatedAt() ?></td>
+      <th>End dt:</th>
+      <td><?php echo $betyolo_bet->getEndDt() ?></td>
     </tr>
   </tbody>
 </table>
