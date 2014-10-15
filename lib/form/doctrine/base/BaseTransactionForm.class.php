@@ -14,29 +14,29 @@ abstract class BaseTransactionForm extends BaseFormDoctrine
 {
   public function setup()
   {
+    $this->setDefault('status', Transaction::PENDING);
+    $this->setDefault('user_id', sfContext::getInstance()->getUser()->getGuardUser()->getId());
+
+
     $this->setWidgets(array(
-      'id'         => new sfWidgetFormInputHidden(),
-      'user_id'    => new sfWidgetFormDoctrineChoice(array('model' => $this->getRelatedModelName('User'), 'add_empty' => false)),
-      'type'       => new sfWidgetFormInputText(),
-      'amount'     => new sfWidgetFormInputText(),
-      'status'     => new sfWidgetFormInputText(),
-      'created_at' => new sfWidgetFormDateTime(),
-      'updated_at' => new sfWidgetFormDateTime(),
+      'status'    => new sfWidgetFormInputHidden(),
+      'type'      => new sfWidgetFormInputHidden(),
+      'user_id'   => new sfWidgetFormInputHidden(),
+      'amount'    => new sfWidgetFormChoice(array('choices' => Transaction::$amounts)),
     ));
 
     $this->setValidators(array(
-      'id'         => new sfValidatorChoice(array('choices' => array($this->getObject()->get('id')), 'empty_value' => $this->getObject()->get('id'), 'required' => false)),
-      'user_id'    => new sfValidatorDoctrineChoice(array('model' => $this->getRelatedModelName('User'))),
-      'type'       => new sfValidatorInteger(),
-      'amount'     => new sfValidatorInteger(),
-      'status'     => new sfValidatorInteger(),
-      'created_at' => new sfValidatorDateTime(),
-      'updated_at' => new sfValidatorDateTime(),
+      'status'    => new sfValidatorChoice(array('choices' => array_keys(Transaction::$statuses))),
+      'type'      => new sfValidatorInteger(),
+      'amount'    => new sfValidatorInteger(),
+      'user_id'   => new sfValidatorInteger(),
     ));
 
-    $this->widgetSchema->setNameFormat('transaction[%s]');
+    $this->validatorSchema->setPostValidator(
+      new sfValidatorCallback(array('callback' => array($this, 'checkUserId')))
+    );
 
-    $this->errorSchema = new sfValidatorErrorSchema($this->validatorSchema);
+    $this->useFields(array('amount'));
 
     $this->setupInheritance();
 
@@ -48,4 +48,12 @@ abstract class BaseTransactionForm extends BaseFormDoctrine
     return 'Transaction';
   }
 
+  public function checkUserId($validator, $values)
+  {
+    if ($values['user_id'] != sfContext::getInstance()->getUser()->getGuardUser()->getId()) {
+      throw new sfValidatorError($validator, 'Invalid user');
+    }
+
+    return $values;
+  }
 }
