@@ -25,6 +25,8 @@ BetyoloBet:
     category_id:  { type: integer, notnull: true }
     status:  { type: integer }
     result:  { type: integer }
+    start_dt: { type:datetime, notnull: true}
+    end_dt: { type:datetime, notnull: true }
   relations:
     BetyoloCategory: { onDelete: CASCADE, local: category_id, foreign: id, foreignAlias: BetyoloBet }
     SideA:
@@ -35,6 +37,11 @@ BetyoloBet:
     SideB:
       class: BetyoloSide
       local: side_b_id
+      foreign: id
+      onDelete: CASCADE
+    sfGuardUser:
+      class: sfGuardUser
+      local: creator_id
       foreign: id
       onDelete: CASCADE
 

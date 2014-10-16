@@ -14,6 +14,35 @@ sf_guard_signout:
   url:   /logout
   param: { module: sfGuardAuth, action: signout }
 
+bet:
+  url: /bet.:sf_format
+  class: sfDoctrineRoute
+  options: { model: BetyoloBet, type: list}
+  param: { module: bet, action: index, sf_format: html }
+  requirements: { sf_method: GET }
+
+bet_show:
+  url: /bet/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: BetyoloBet, type: object }
+  param:   { module: bet, action: show, sf_format: html }
+  requirements: { sf_method: GET }
+
+side_show:
+  url: /side/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: BetyoloSide, type: object }
+  param:   { module: side, action: show, sf_format: html }
+  requirements: { sf_method: GET }
+
+category_show:
+  url: /category/:id.:sf_format
+  class:   sfDoctrineRoute
+  options: { model: BetyoloCategory, type: object }
+  param:   { module: category, action: show, sf_format: html }
+  requirements: { sf_method: GET }
+
+
 #sf_guard_password:
 #  url:   /request_password
 #  param: { module: sfGuardAuth, action: password }
