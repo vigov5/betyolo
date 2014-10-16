@@ -13,24 +13,38 @@ class transactionActions extends sfActions
   public function executeDeposit(sfWebRequest $request)
   {
     $this->form = new DepositForm();
-  }
-
-  public function executeUserdeposit(sfWebRequest $request)
-  {
-    $this->form = new DepositForm();
 
     if ($request->isMethod(sfRequest::POST)) {
       $this->form->bind($request->getParameter('deposit'));
       if ($this->form->isValid()) {
-        $user_id = $this->form->getValue('user_id');
-        if($user_id == sfContext::getInstance()->getUser()->getGuardUser()->getId()) {
-          $this->form->save();
-          $this->getUser()->setFlash('success', 'You successfully deposited');
-        }
-      } else{
+        $this->form->save();
+        $this->getUser()->setFlash('success', 'You successfully deposited');
+      } else {
         $this->getUser()->setFlash('error', 'You unsuccessfully deposited');
       }
+
+      $this->redirect('transaction/deposit');
     }
-    $this->redirect('transaction/deposit');
+
+    $this->setTemplate('deposit');
+  }
+
+  public function executeWithdraw(sfWebRequest $request)
+  {
+    $this->form = new WithdrawForm();
+
+    if ($request->isMethod(sfRequest::POST)) {
+      $this->form->bind($request->getParameter('withdraw'));
+      if ($this->form->isValid()) {
+        $this->form->save();
+        $this->getUser()->setFlash('success', 'You successfully withdrawed');
+      } else {
+        $this->getUser()->setFlash('error', 'You unsuccessfully withdrawed');
+      }
+
+      $this->redirect('transaction/withdraw');
+    }
+
+    $this->setTemplate('withdraw');
   }
 }

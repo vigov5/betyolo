@@ -1,15 +1,15 @@
-<h1>New Desposit</h1>
+<h1>New Withdraw</h1>
 <?php use_stylesheets_for_form($form) ?>
 <?php use_javascripts_for_form($form) ?>
 
-<form action="<?php echo url_for('transaction/deposit') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
+<form action="<?php echo url_for('transaction/withdraw') ?>" method="post" <?php $form->isMultipart() and print 'enctype="multipart/form-data" ' ?>>
   <table>
     <tfoot>
       <tr>
         <td colspan="2">
           <?php echo $form->renderHiddenFields(false) ?>
           &nbsp;<a href="<?php echo url_for('homepage') ?>">Cancel</a>
-          <input type="submit" value="Deposit" />
+          <input type="submit" value="Withdraw" />
         </td>
       </tr>
     </tfoot>

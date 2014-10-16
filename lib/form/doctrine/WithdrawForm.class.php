@@ -1,21 +1,21 @@
 <?php
 
 /**
- * Deposit form.
+ * Withdraw form.
  *
  * @package    betyolo
  * @subpackage form
  * @author     Nguyen Anh Tuan
  * @version    SVN: $Id: sfDoctrineFormTemplate.php 23810 2009-11-12 11:07:44Z Kris.Wallsmith $
  */
-class DepositForm extends BaseTransactionForm
+class WithdrawForm extends BaseTransactionForm
 {
   public function configure()
   {
-    $this->setDefault('type', Transaction::DEPOSIT);
+    $this->setDefault('type', Transaction::WITHDRAW);
 
     parent::setup();
 
-    $this->widgetSchema->setNameFormat('deposit[%s]');
+    $this->widgetSchema->setNameFormat('withdraw[%s]');
   }
 }
