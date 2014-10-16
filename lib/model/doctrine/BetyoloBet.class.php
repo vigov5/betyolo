@@ -23,4 +23,13 @@ class BetyoloBet extends BaseBetyoloBet
     3 => "None",
   );
   
+  public function printStatus() 
+  {
+  	return self::$statuses[$this->getStatus()];
+  }
+
+  public function printResult()
+  {
+  	return self::$results[$this->getResult()];
+  }
 }

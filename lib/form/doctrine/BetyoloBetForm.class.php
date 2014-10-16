@@ -12,5 +12,8 @@ class BetyoloBetForm extends BaseBetyoloBetForm
 {
   public function configure()
   {
+    unset(
+      $this['created_at'], $this['updated_at']
+    );
   }
 }
