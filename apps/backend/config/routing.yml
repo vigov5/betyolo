@@ -23,3 +23,10 @@ default_index:
 
 default:
   url:   /:module/:action/*
+
+confirm_transaction:
+  url: /transaction/confirm/:id/:type
+  param: {module: transaction, action: confirm}
+cancel_transaction:
+  url: /transaction/cancel/:id/:type
+  param: {module: transaction, action: cancel}

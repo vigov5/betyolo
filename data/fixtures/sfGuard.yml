@@ -7,14 +7,29 @@ sfGuardUser:
     password:       admin
     is_super_admin: true
     Groups:         [Group_admin]
+  User_normal:
+    first_name:     Tuan
+    last_name:      Nguyen
+    email_address:  nguyen.anh.tuan@framgia.com
+    username:       tuanna
+    password:       tuanna
+    is_super_admin: false
+    Groups:         [Group_user]
 
 sfGuardGroup:
   Group_admin:
     name:           admin
     description:    Administrator group
     Permissions:    [Permission_admin]
+  Group_user:
+    name:           user
+    description:    Normal user group
+    Permissions:    [Permission_user]
 
 sfGuardPermission:
   Permission_admin:
     name:           admin
     description:    Administrator permission
+  Permission_user:
+    name:           user
+    description:    Normal User permission

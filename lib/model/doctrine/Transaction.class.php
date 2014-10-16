@@ -43,15 +43,13 @@ class Transaction extends BaseTransaction
       return false;
     }
 
-    $user_hcoin = $this->getUser()->getProfile()->getHcoin();
+    $user_profile = Doctrine_Core::getTable('sfGuardUser')->find($this->getUserId())->getProfile();
 
-    if (!$user_hcoin) {
-      $user_profile = new UserProfile();
-      $user_profile->setsfGuardUserId($this->getUser()->getId());
+    if (!$user_profile->getHcoin()) {
+      $user_profile->setsfGuardUserId($this->getUserId());
       $user_profile->setHcoin($hcoin);
     } else {
-      $user_profile = Doctrine_Core::getTable('UserProfile')->find($this->getUser()->getId());
-      $user_profile->setHcoin($user_hcoin + $hcoin);
+      $user_profile->setHcoin($user_profile->getHcoin() + $hcoin);
     }
     $user_profile->save();
 
@@ -61,9 +59,29 @@ class Transaction extends BaseTransaction
     return true;
   }
 
-  public function cancelDeposit()
+  public function cancelTransaction()
   {
     $this->setStatus(self::FAILED);
     $this->save();
+  }
+
+  public function withdraw($hcoin = 0)
+  {
+    $user_profile = Doctrine_Core::getTable('sfGuardUser')->find($this->getUserId())->getProfile();
+    if(!$user_profile) {
+      return false;
+    }
+    $user_hcoin = $user_profile->getHcoin();
+    if ($this->getStatus() != self::PENDING || $hcoin <= 0  || $hcoin > $user_hcoin) {
+      return false;
+    }
+
+    $user_profile->setHcoin($user_hcoin - $hcoin);
+    $user_profile->save();
+
+    $this->setStatus(self::COMPLETED);
+    $this->save();
+
+    return true;
   }
 }
