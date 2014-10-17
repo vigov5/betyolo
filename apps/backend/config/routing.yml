@@ -1,3 +1,12 @@
+betyolo_bet:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                BetyoloBet
+    module:               bet
+    prefix_path:          /bet
+    column:               id
+    with_wildcard_routes: true
+
 transaction:
   class: sfDoctrineRouteCollection
   options:
