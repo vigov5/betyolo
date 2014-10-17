@@ -23,6 +23,8 @@
                                     <li><a href="#">Home</a></li>
                                 </ul>
                                 <ul class="nav navbar-nav navbar-right">
+                                    <li><a href="<?php echo url_for('transaction/deposit') ?>">Deposit</a></li>
+                                    <li><a href="<?php echo url_for('transaction/withdraw') ?>">Withdraw</a></li>
                                     <li class="dropdown">
                                         <?php if ($sf_user->isAuthenticated()): ?>
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"><?php echo $sf_user->getUsername(); ?><span class="caret"></span></a>

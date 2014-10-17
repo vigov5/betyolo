@@ -15,9 +15,15 @@ class transactionActions extends autoTransactionActions
 {
   public function executeIndex(sfWebRequest $request)
   {
-    $this->transactions = Doctrine_Core::getTable('Transaction')
-      ->createQuery('a')
-      ->where('a.status = ?', Transaction::PENDING)
+    $this->deposits = Doctrine_Core::getTable('Transaction')
+      ->createQuery('d')
+      ->where('d.status = ?', Transaction::PENDING)
+      ->andWhere('d.type = ?', Transaction::DEPOSIT)
+      ->execute();
+    $this->withdraws = Doctrine_Core::getTable('Transaction')
+      ->createQuery('w')
+      ->where('w.status = ?', Transaction::PENDING)
+      ->andWhere('w.type = ?', Transaction::WITHDRAW)
       ->execute();
   }
 
@@ -27,9 +33,13 @@ class transactionActions extends autoTransactionActions
 
     $deposit_hcoin = $this->transaction->getAmount();
 
-    $success = $this->transaction->deposit((int)$deposit_hcoin);
+    if ($request->getParameter('type') == Transaction::DEPOSIT) {
+      $success = $this->transaction->deposit((int)$deposit_hcoin);
+    } elseif ($request->getParameter('type') == Transaction::WITHDRAW) {
+      $success = $this->transaction->withdraw((int)$deposit_hcoin);
+    }
 
-    $success ? $this->getUser()->setFlash('success', 'You successfully accepted deposit') : $this->getUser()->setFlash('error', 'You unsuccessfully accepted deposit');
+    $success ? $this->getUser()->setFlash('success', 'You successfully accepted transaction') : $this->getUser()->setFlash('error', 'You unsuccessfully accepted transaction');
 
     $this->redirect('transaction/index');
   }
@@ -38,9 +48,9 @@ class transactionActions extends autoTransactionActions
   {
     $this->transaction = Doctrine_Core::getTable('Transaction')->find($request->getParameter('id'));
 
-    $this->transaction->cancelDeposit();
+    $this->transaction->cancelTransaction();
 
-    $this->getUser()->setFlash('success', 'You successfully canceled deposit');
+    $this->getUser()->setFlash('success', 'You successfully canceled transaction');
 
     $this->redirect('transaction/index');
   }
