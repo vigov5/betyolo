@@ -4,6 +4,21 @@ betyolo_bet:
     model:                BetyoloBet
     module:               bet
     prefix_path:          /bet
+betyolo_side:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                BetyoloSide
+    module:               betyolo_side
+    prefix_path:          /betyolo_side
+    column:               id
+    with_wildcard_routes: true
+
+betyolo_category:
+  class: sfDoctrineRouteCollection
+  options:
+    model:                BetyoloCategory
+    module:               betyolo_category
+    prefix_path:          /betyolo_category
     column:               id
     with_wildcard_routes: true
 
