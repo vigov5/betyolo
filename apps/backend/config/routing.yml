@@ -19,8 +19,6 @@ betyolo_category:
     model:                BetyoloCategory
     module:               betyolo_category
     prefix_path:          /betyolo_category
-    column:               id
-    with_wildcard_routes: true
 
 transaction:
   class: sfDoctrineRouteCollection
