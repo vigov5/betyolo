@@ -13,4 +13,12 @@ require_once dirname(__FILE__).'/../lib/betyolo_categoryGeneratorHelper.class.ph
  */
 class betyolo_categoryActions extends autoBetyolo_categoryActions
 {
+  public function executeIndex(sfWebRequest $request)
+  {
+
+    $this->betyolo_categorys = Doctrine_Core::getTable('BetyoloCategory')
+      ->createQuery('a')
+      ->execute();
+
+  }
 }
